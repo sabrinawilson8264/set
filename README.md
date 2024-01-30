@@ -35,3 +35,21 @@ $$c = n^d = 3^3 = 27$$
 $$s = n^{d-1} = 3^2 = 9$$
 That is there is 27 cards which can form up to 9 sets. 
 
+Also note that the number of cards in a set is determined by n, the number of values in a dimension. This is because, as there is no identical cards, each set of cards much have at least one dimension in which the value is different between cards. 
+
+How many possible sets exist in a deck of d-dimensional set with n values per dimension? 
+For each set of n-1 cards, only one card exists that will complete the set. Therefore it is sufficient to calculate how many combinations of n^d items exist. 
+
+$$ {c \choose 2} $$
+
+$$ \frac{c!}{2!(c-2)!} $$
+
+$$ \frac{n^d!}{2(n^d -2)!} $$
+
+For 4-set, 
+
+$$ \frac{3^4!}{2(3^4 -2)!} = \frac{81!}{2\cdot79!} = \frac{81\cdot80\cdot79!}{2\cdot79!} = \frac{81\cdot80}{2} =  3,240 $$
+
+For 3-set
+
+$$ \frac{3^3!}{2(3^3 -2)!} = \frac{27!}{2\cdot25!} = \frac{27\cdot26}{2} = 351 $$

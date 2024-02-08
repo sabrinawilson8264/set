@@ -24,10 +24,24 @@ The game invites many questions that are mathematical in nature. For example, ho
 
 
 * * a bit about monte carlo simulation
-* generalising the game of set to different dimensions and values.
-We can 
+ 
 
-* Explain cap sets
+We can imagine the cards in Set as a set of points in 4 dimensional space. Each "attribute" on the cards (colour, filling, shape, number) corresponds to an axis in four dimensions and each value for that attribute corresponds to a value along that axis. 
+
+We can generalise the game of SET into higher or lower dimensions by imagining that each "attribute" on the cards (colour, shading, shape, number of shapes) 
+
+For example: 
+insert an image of a card
+
+This card can be represented as the vector ("green", "one", "solid", "squiggle"). If we map each value to a digit 0, 1 or 2, we can further compress the information contained in this card to (0, 1, 1, 2) 
+
+insert image of mapping
+
+Once the cards have been compressed into a vector, it's easy to imagine a card with any number of dimensions and any number of values per dimension - you just add more elements to the vector and increase the range of digits. For example, we could have a a game of set with 7 attributes each of which had 9 different values. If we used the digits 0-8 to represent the different values for each attribute, a card from this game could be represented as (4, 1, 7, 2, 0, 2, 7) (since the number of the cards is values^dimensions, 9^7 = 4,782,969 which would become a quite long and cumbersome game).
+
+now explain SET(3,3) HERE
+
+The game of SET is governed by chance and probability. Imagining the game in different dimensions naturally invites the question: _Is the probability of particular outcomes in the game SET related to the dimension of the game and the number of values in each dimension?_ This question will be the focus of the rest of this report. 
 
   
 ### Introduction

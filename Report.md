@@ -5,7 +5,7 @@
 ### About SET
 SET is a pattern recognition card game released in 1991 that is beloved by maths students everywhere. The game uses a special deck of cards where every card has 4 attributes (colour, shape, number of shapes, shading) and each attribute can take 3 values
 
-| <img src="SET-Main-Image-2-superJumbo.png" width="50%"> | 
+| <img src="images\SET-Main-Image-2-superJumbo.png" width="50%"> | 
 |:--:| 
 | <sup>*An example of 12 cards*</sup> |
 
@@ -33,7 +33,7 @@ Stochastic simulation uses repeated random sampling and the accuracy of the appr
 We can imagine the cards in SET as a set of points in 4 dimensional space. Each "attribute" on the cards (colour, filling, shape, number) corresponds to an axis in four dimensions and each value for that attribute corresponds to a value along that axis. 
 
 For example: 
-| <img src="set-game-cards 1.png" width="75%"> | 
+| <img src="images\set-game-cards 1.png" width="75%"> | 
 |:--:| 
 | <sup>*Example set card with 2 striped purple squiggles*</sup> |
 
@@ -184,7 +184,7 @@ for i in range(games):
 The following simulations were run with results following,
 #### 100,000 games of SET with 3 dimensions and 3 values per dimension
 
-| <img src="100000games__3d__3n.png" width="75%"> | 
+| <img src="images\100000games__3d__3n.png" width="75%"> | 
 |:--:| 
 
 |Cards remaining|0|3|6|9|
@@ -193,7 +193,7 @@ The following simulations were run with results following,
 
 #### 100,000 games of SET with 4 dimensions and 3 values per dimension
 
-| <img src="100000games__4d__3n.png" width="75%"> | 
+| <img src="images\100000games__4d__3n.png" width="75%"> | 
 |:--:| 
 
 
@@ -203,7 +203,7 @@ The following simulations were run with results following,
 
 #### 100,000 games of SET with 5 dimensions and 3 values per dimension
   
-| <img src="100000games__5d__3n.png" width="75%"> | 
+| <img src="images\100000games__5d__3n.png" width="75%"> | 
 |:--:| 
  
 |Cards Remaining|3|6|9|12|15|18|21|24|27|

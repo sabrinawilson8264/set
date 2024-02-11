@@ -1,9 +1,11 @@
-## Modelling End Game Configurations in Set
+# Modelling End Game Configurations in Set
 
-### Background Information
-SET is a pattern recognition card game released in 1991 <sup>[4]</sup> that is beloved by maths students everywhere. The game uses a special deck of cards where every card has 4 attributes (colour, shape, number of shapes, shading) and each attribute can take 3 values
+## Background Information
 
-| <img src="SET-Main-Image-2-superJumbo.png" width="75%"> | 
+### About SET
+SET is a pattern recognition card game released in 1991 that is beloved by maths students everywhere. The game uses a special deck of cards where every card has 4 attributes (colour, shape, number of shapes, shading) and each attribute can take 3 values
+
+| <img src="SET-Main-Image-2-superJumbo.png" width="50%"> | 
 |:--:| 
 | <sup>*An example of 12 cards*</sup> |
 
@@ -19,21 +21,18 @@ The aim of the game is to identify "sets" amongst the cards on the table that sa
 > If 2 cards are the same and 1 card is different for any attribute, then it is not a SET" <sup> [3] </sup>
 
 
-In the standard game of SET, the dealer deals 12 cards onto the table and all players simultaneously look for sets amongst the cards. If none are found, three additional cards are dealt. When a player see's a set, she calls "SET!" and takes the three cards and the dealer lays three more cards onto the table. The game continues like this and ends when all cards the deck is exhausted and there are no more sets on the table. Whoever has collected the most sets at the end of the game is the winner. 
+In the standard game of SET, the dealer deals 12 cards onto the table and all players simultaneously look for sets amongst the cards. If none are found, three additional cards are dealt. When a player see's a set, she calls "SET!" and takes the three cards. Then, the dealer lays three more cards onto the table. The game continues in this fashion and ends when all cards the deck is exhausted and none of the remaining cards form sets. Whoever has collected the most sets at the end of the game is the winner. 
 
-The question that this report aims to answer is to do with how many cards are left on the table at the end of the game that cannot be formed into sets and how likely it is that all the cards form sets and there is none leftover at the end. 
+This report is interested in the "end game" configuration of SET. That is, how many cards are left at the end of the game that do not form sets and in particular, how likely is it that there are _no_ cards left at the end. 
 
-To investigate this question, we will employ a Monte Carlo or stochastic simulation of the game. The Monte Carlo method is a mathematical technique that is used to estimate the probability distribution of the outcome of an uncertain event. The method uses repeated random sampling and the accuracy of the approximation improves as the number of sample increases. 
-
+### Stochastic Simulation
+To investigate this question, we will employ a stochastic simulation, also known as a Monte Carlo simulation. Stochastic simulation, or Monte Carlo simulation, is a mathematical technique that is used to estimate the probability distribution of the outcome of an uncertain event. From Heath (p.511), 
 > "Stochastic simulation methods attempt to mimic or replicate the behaviour of a system by exploiting randomness to obtain a statistical sample of possible outcomes" 
 
+Stochastic simulation uses repeated random sampling and the accuracy of the approximation improves as the number of sample increases. With this method, we will simulate many hundreds of thousands of games and use the outcomes to estimate the probability distribution for the end game configuration.
 
-
-https://people.smp.uq.edu.au/DirkKroese/mccourse.pdf
-
-We can imagine the cards in Set as a set of points in 4 dimensional space. Each "attribute" on the cards (colour, filling, shape, number) corresponds to an axis in four dimensions and each value for that attribute corresponds to a value along that axis. 
-
-We can generalise the game of SET into higher or lower dimensions by imagining that each "attribute" on the cards (colour, shading, shape, number of shapes) 
+### Dimensionality of the game
+We can imagine the cards in SET as a set of points in 4 dimensional space. Each "attribute" on the cards (colour, filling, shape, number) corresponds to an axis in four dimensions and each value for that attribute corresponds to a value along that axis. 
 
 For example: 
 | <img src="set-game-cards 1.png" width="75%"> | 
@@ -58,9 +57,29 @@ This card can be represented as the vector ("purple", "two", "squiggle", "stripe
 |               | Open         | 2             |  
 
 
-Once the cards have been compressed into a vector, it's easy to imagine a card with any number of dimensions and any number of values per dimension - you just add more elements to the vector and increase the range of digits. For example, we could have a a game of set with 7 attributes each of which had 9 different values. If we used the digits 0-8 to represent the different values for each attribute, a card from this game could be represented as (4, 1, 7, 2, 0, 2, 7) (since the number of the cards is values^dimensions, 9^7 = 4,782,969 which would become a quite long and cumbersome game).
 
-now explain SET(3,3) HERE
+Once the cards have been represented as a vector, it's easy to imagine how we can generalise the game into higher or lower dimensions: you just change the number of elements in the vector and change the range of digits. 
+
+For example, a good version of the game to play with beginners is 3-dimensional SET. 
+With the regular deck of SET cards, you pick an attribute to keep constant and you remove
+all the cards with other values for that attribute from the game e.g. pick colour is purple and 
+remove all green and red cards from the game. 
+
+
+In this 3-dimensional version
+of the game there are only 3 attributes to check if the values are all 
+different or all the same: number, shape and shading. 
+
+These cards can similarly be represented as vectors with three elements, 
+In this game, the example card above would be represented as the vector (1, 2, 1). 
+
+The number of cards in the game is 
+$$ C = n^{d} $$
+$$ = 3^{3}  $$ 
+$$ = 27 $$
+
+
+
 
 The game of SET is governed by chance and probability. Imagining the game in different dimensions naturally invites the question: _Is the probability of particular outcomes in the game SET related to the dimension of the game and the number of values in each dimension?_ This question will be the focus of the rest of this report. 
 
@@ -90,7 +109,7 @@ card_3 = [2, 1, 0, 2]
 
 is_it_a_set([card_1, card_2, card_3], d, n)
 ```
-The function loops over each position in the card and checks if the value at that position is the same in all cards or different in all cards or otherwise. If the value of an attribute is _not_ the same on all cards or _not_ different on all cards, the function returns 0. 
+The function loops over each position in the card and checks if the value at that position is the same in all cards or different in all cards or otherwise. If the value of an attribute is _not_ the same on all cards and _not_ different on all cards, the function returns 0. 
 
 In the context of the example call, the function appends the 0th value in `card_1` and the 0th value in `card_2` and the 0th value in `card_3` to a list which is then converted to a set (python object) which deduplicates the values. If the set (python object) has length 1, the value at the 0th position must be the same on all 3 cards. Conversely, if the set (python object) has length 3, the value at the 0th position must be different on all 3 cards. If the condition is satisfied, we continue to the next position and repeat. If the condition is not satisfied, the cards do _not_ form a set and the function returns 0. 
 
@@ -168,7 +187,6 @@ The following simulations were run with results following,
 
 | <img src="100000games__3d__3n.png"> | 
 |:--:| 
-| <sup>*Example set card with 2 striped purple squiggles*</sup> |
 
 |Cards remaining|0|3|6|9|
 |:--:|:--:|:--:|:--:|:--:|
@@ -178,7 +196,7 @@ The following simulations were run with results following,
 
 | <img src="100000games__4d__3n.png" width="75%"> | 
 |:--:| 
-| <sup>*Example set card with 2 striped purple squiggles*</sup> |
+
 
 |Cards remaining|0|3|6|9|12|15|
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
@@ -188,8 +206,7 @@ The following simulations were run with results following,
   
 | <img src="100000games__5d__3n.png" width="75%"> | 
 |:--:| 
-| <sup>*Example set card with 2 striped purple squiggles*</sup> |
-
+ 
 |Cards Remaining|3|6|9|12|15|18|21|24|
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 |Frequency|1|1,215|12,552|37,415|35,820|11,680|1,277|40|
@@ -203,8 +220,8 @@ The following simulations were run with results following,
 
 #### References
 1. McMahon, Liz, et al. The Joy of SET: The Many Mathematical Dimensions of a Seemingly Simple Card Game. Princeton University Press, 2017. 
-2. https://www.setgame.com/sites/default/files/teacherscorner/DEVELOPING%20MATHEMATICAL%20REASONING.pdf
-3. https://www.setgame.com/sites/default/files/instructions/SET%20INSTRUCTIONS%20-%20ENGLISH.pdf
+2. Larson Quinn, Anne, et al. “Developing Mathematical Reasoning Using Attribute Games.” www.setgame.com, www.setgame.com/sites/default/files/teacherscorner/DEVELOPING%20MATHEMATICAL%20REASONING.pdf. Accessed 11 Feb. 2024.
+3. “Set Instructions - English.Pdf.” www.setgame.com, 1998, www.setgame.com/sites/default/files/instructions/SET INSTRUCTIONS - ENGLISH.pdf. 
 4. https://en.wikipedia.org/wiki/Set_(card_game)
 5. Heath, Michael T. “13 Random Numbers and Simulation.” Scientific Computing An Introductory Survey, 2nd ed., McGraw-Hill, New York, NY, 2002, pp. 511–517.
 6. Warne, Henrik. “SET® Probabilities Revisited.” Henrik Warne’s Blog, 30 Sept. 2011, henrikwarne.com/2011/09/30/set-probabilities-revisited/.

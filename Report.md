@@ -163,10 +163,36 @@ for i in range(games):
 ```
 
 #### Results
-Three simulations with the following conditions were run,
-* 100,000 games of SET with 3 dimensions and 3 values per dimension
-* 100,000 games of SET with 4 dimensions and 3 values per dimension
-* 100,000 games of SET with 5 dimensions and 3 values per dimension
+The following simulations were run with results following,
+##### 100,000 games of SET with 3 dimensions and 3 values per dimension
+
+| <img src="100000games__3d__3n.png"> | 
+|:--:| 
+| <sup>*Example set card with 2 striped purple squiggles*</sup> |
+
+|Cards remaining|0|3|6|9|
+|:--:|:--:|:--:|:--:|:--:|
+|Frequency|39,226 |0 |59,389 |1,385| 
+
+##### 100,000 games of SET with 4 dimensions and 3 values per dimension
+
+| <img src="100000games__4d__3n.png" width="75%"> | 
+|:--:| 
+| <sup>*Example set card with 2 striped purple squiggles*</sup> |
+
+|Cards remaining|0|3|6|9|12|15|
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+|Frequency|1,669|0|49,487|42,262|6,532|50|
+
+##### 100,000 games of SET with 5 dimensions and 3 values per dimension
+  
+| <img src="100000games__5d__3n.png" width="75%"> | 
+|:--:| 
+| <sup>*Example set card with 2 striped purple squiggles*</sup> |
+
+|Cards Remaining|3|6|9|12|15|18|21|24|
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+|Frequency|1|1,215|12,552|37,415|35,820|11,680|1,277|40|
 
 #### Analysis 
 
@@ -174,9 +200,10 @@ Three simulations with the following conditions were run,
 
 ### Future work and references
 #### Future work
+
 #### References
 1. McMahon, Liz, et al. The Joy of SET: The Many Mathematical Dimensions of a Seemingly Simple Card Game. Princeton University Press, 2017. 
-2. [https://www.setgame.com/sites/default/files/teacherscorner/DEVELOPING%20MATHEMATICAL%20REASONING.pdf]
+2. https://www.setgame.com/sites/default/files/teacherscorner/DEVELOPING%20MATHEMATICAL%20REASONING.pdf
 3. https://www.setgame.com/sites/default/files/instructions/SET%20INSTRUCTIONS%20-%20ENGLISH.pdf
 4. https://en.wikipedia.org/wiki/Set_(card_game)
 5. Heath, Michael T. “13 Random Numbers and Simulation.” Scientific Computing An Introductory Survey, 2nd ed., McGraw-Hill, New York, NY, 2002, pp. 511–517.

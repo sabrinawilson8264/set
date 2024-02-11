@@ -7,6 +7,8 @@ SET is a pattern recognition card game released in 1991[reference] that is belov
 * number of shapes can be 1, 2 or 3
 * shading can be solid, stripe or open
 
+![Image showing an example of 12 cards from SET](SET-Main-Image-2-superJumbo.png "An example of 12 cards from SET")
+
 The aim of the game is to identify "sets" amongst the cards on the table which must satisfy the following rule: 
 > "a SET consists of 3 cards in which each of the cards' features, looked at one-by-one, are the same on each card, or, are different on each card. All of the features must seperately satisfy this rule
 
@@ -47,6 +49,10 @@ This card can be represented as the vector ("green", "one", "squiggle", "solid")
 | Shading       | Solid        | 0             | 
 |               | Stripe       | 1             | 
 |               | Open         | 2             |  
+
+
+![Image showing an example of 12 cards from SET](SET-Main-Image-2-superJumbo.png "An example of 12 cards from SET")
+
 
 Once the cards have been compressed into a vector, it's easy to imagine a card with any number of dimensions and any number of values per dimension - you just add more elements to the vector and increase the range of digits. For example, we could have a a game of set with 7 attributes each of which had 9 different values. If we used the digits 0-8 to represent the different values for each attribute, a card from this game could be represented as (4, 1, 7, 2, 0, 2, 7) (since the number of the cards is values^dimensions, 9^7 = 4,782,969 which would become a quite long and cumbersome game).
 

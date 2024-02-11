@@ -76,12 +76,11 @@ We assume each shuffled deck equally likely and uniformly distributed
 ### Body
 To simulate the game, three functions were written which are outlined below
 
-#### _function_ is_it_a_set(x, d, n)
-The purpose of this function is to determine whether a list of cards form a set. The function takes three variables: x, a list of lists which contain the details of the cards being checked; d, the dimension of the game being played i.e. how many attributes each card has; and n, the number of values per attribute. 
+#### function `is_it_a_set(x, d, n)`
+The purpose of this function is to determine whether a list of cards form a set. The function takes three variables: `x`, a list of lists which contain the details of the cards being checked; `d`, the dimension of the game being played i.e. how many attributes each card has; and `n`, the number of values per attribute. The function either returns 1 if the cards form a set or 0 if they do not. 
 
 An example call of this function is
 
- 
 ```python
 d = 4
 n = 3
@@ -93,11 +92,84 @@ is_it_a_set([card_1, card_2, card_3], d, n)
 ```
 The function loops over each position in the card and checks if the value at that position is the same in all cards or different in all cards or otherwise. If the value of an attribute is _not_ the same on all cards or _not_ different on all cards, the function returns 0. 
 
-In the context of the example call, the function appends the 0th value in `card_1` and the 0th value in `card_2` and the 0th value in `card_3` to a list which is then converted to a set (python object) which deduplicates the values. If the set (python object) has length 1, the value at the 0th position must be the same on all 3 cards. Conversely, if the set (python object) has length 3, the value at the 0th position must be different on all 3 cards. 
-#### _function_ find_sets_on_the_board(board, completed_sets, d, n)
+In the context of the example call, the function appends the 0th value in `card_1` and the 0th value in `card_2` and the 0th value in `card_3` to a list which is then converted to a set (python object) which deduplicates the values. If the set (python object) has length 1, the value at the 0th position must be the same on all 3 cards. Conversely, if the set (python object) has length 3, the value at the 0th position must be different on all 3 cards. If the condition is satisfied, we continue to the next position and repeat. If the condition is not satisfied, the cards do _not_ form a set and the function returns 0. 
+
+In the example call, the values at each position are: in position 0 the values are {0, 1, 2} (all different); in position 1 the values are {1, 1, 1} (all the same), in position 2 the values are {2, 1, 0} (all different) and in position 3 the values are {0, 1, 2} (all different). For this example, the function would return 1. 
+
+Note that the function takes d and n as input as it is designed to be dimension- and value- agnostic and can be used for versions of set with any dimensions and any values per dimension. 
+
+#### function `find_sets_on_the_board(board, completed_sets, d, n)`
+The purpose of this function is to look at a list of cards (the "board"), determine if any sets are present and append them to a list of sets found previously. The function takes four variables: `board`, a list of cards that make up the "board" or currently dealt cards; `completed_sets`, a list of lists where each sub-list is a set of three cards that have previously been found in the game; `d`, the dimension of the game being played i.e. how many attributes each card has; and `n`, the number of values per attribute. The function returns two variables, `board` and `completed_sets` which will either be 
+* the same as when the variables were inputted if no sets are found on the board
+* have three cards which form a set removed from `board` and appended to `completed_sets` if sets are found.
+
+An example call of this function is 
+```python
+d = 4
+n = 3
+completed_sets = []
+board = [(1, 0, 0, 2), (2, 1, 1, 2), (1, 1, 2, 1),
+          (2, 2, 2, 1), (1, 2, 0, 2), (1, 2, 1, 0),
+            (2, 1, 0, 1), (0, 0, 2, 2), (0, 1, 1, 0),
+              (0, 1, 0, 0), (0, 1, 1, 2), (1, 0, 0, 0)]
 
 
-#### _function_ lets_play_set(d, n)
+board, completed_sets = find_sets_on_the_board(board,completed_sets,d,n)
+
+```
+
+The function iterates over every possible combination of n cards on the board in a random order and testing if those cards form a set by calling the `is_it_a_set` function until a set is found. Once a set is found, the cards that form the set are appended to the list `completed_sets` and removed from the list `board` and the new values of `completed_sets` and `board` are returned. If the function iterates over every possible combination of n cards on the board and no sets are found, `completed_sets` and `board` are returned, unchanged. 
+
+The function makes use of the `itertools.combinations` method to determine the list of all possible combinations of cards on the board, as well as the `random.shuffle` method to iterate over the combinations in a random order. 
+
+In the example call, there are a number of possible sets to find in `board` but for example, the function might find `[(1, 0, 0, 2), (1, 1, 2, 1), (1, 2, 1, 0)]` first and return
+
+```python
+board = [(2, 1, 1, 2),(2, 2, 2, 1), (1, 2, 0, 2),
+           (2, 1, 0, 1), (0, 0, 2, 2), (0, 1, 1, 0),
+            (0, 1, 0, 0), (0, 1, 1, 2), (1, 0, 0, 0)]
+completed_sets = [[(1, 0, 0, 2), (1, 1, 2, 1), (1, 2, 1, 0)]]
+```
+
+Again, the function takes d and n as input as it is designed to be dimension- and value- agnostic and can be used for versions of set with any dimensions and any values per dimension. 
+
+#### function `lets_play_set(d, n)`
+The purpose of this function is to create a deck of cards, shuffle them, incrementally deal them onto the board, look for sets, deal more cards onto the board and look for more sets until the deck is exhausted and no more sets can be formed. 
+
+The function takes two variables:`d`, the dimension of the game being played i.e. how many attributes each card has; and `n`, the number of values per attribute. 
+
+This function uses `itertools.product` function to create every possible card from `n` and `d` and `random.shuffle` to shuffle the cards at the beginning of the game. 
+
+The function returns two variables: `board`, a list of cards leftover at the end that cannot be formed into sets; and `completed_sets` a list of lists where each sub-list contains cards that were formed into sets during the game. 
+
+An example call of this function is 
+```python
+d = 4
+n = 3
+
+board, completed_sets = lets_play_set(d,n)
+```
+
+Again, the function takes d and n as input as it is designed to be dimension- and value- agnostic and can be used for versions of set with any dimensions and any values per dimension. 
+
+#### Main
+The main section of the code 
+
+Define the dimensions and values per dimension of the game and how many games are to be simulated. For each game, the number of remaining cards at the end of the game is recorded (for clarity, the number of cards remaining at the end of the game is divided by 3). 
+```python
+for i in range(games):
+    board, completed_sets = lets_play_set(d,n)
+    remainders.append(len(board)//n)
+```
+
+#### Results
+Three simulations with the following conditions were run,
+* 100,000 games of SET with 3 dimensions and 3 values per dimension
+* 100,000 games of SET with 4 dimensions and 3 values per dimension
+* 100,000 games of SET with 5 dimensions and 3 values per dimension
+
+#### Analysis 
+
 
 
 ### Future work and references

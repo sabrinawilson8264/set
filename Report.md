@@ -7,17 +7,16 @@ SET is a pattern recognition card game released in 1991[reference] that is belov
 * number of shapes can be 1, 2 or 3
 * shading can be solid, stripe or open
 
-![Image showing an example of 12 cards from SET](SET-Main-Image-2-superJumbo.png "An example of 12 cards from SET")
+| <img src="SET-Main-Image-2-superJumbo.png" width="75%"> | 
+|:--:| 
+| <sup>*An example of 12 cards*</sup> |
 
 The aim of the game is to identify "sets" amongst the cards on the table which must satisfy the following rule: 
 > "a SET consists of 3 cards in which each of the cards' features, looked at one-by-one, are the same on each card, or, are different on each card. All of the features must seperately satisfy this rule
 
 > In other words: shape must be either the same on all 3 cards, or different on each of the 3 cards; colour must be either the same on all 3 cards or different on all 3 cards, etc.
-> If 2 cards are the same and 1 card is different for any attribute, then it is not a SET" 
+> If 2 cards are the same and 1 card is different for any attribute, then it is not a SET" <sup> [3] </sup>
 
-
-[reference https://www.setgame.com/sites/default/files/instructions/SET%20INSTRUCTIONS%20-%20ENGLISH.pdf] 
-(insert some images as well)
 
 In the standard game of SET, the dealer deals 12 cards onto the table and all players simultaneously look for sets amongst the cards. If none are found, three additional cards are dealt. When a player see's a set, she calls "SET!" and takes the three cards and the dealer lays three more cards onto the table. The game continues like this and ends when all cards the deck is exhausted and there are no more sets on the table. Whoever has collected the most sets at the end of the game is the winner. 
 
@@ -31,7 +30,9 @@ We can imagine the cards in Set as a set of points in 4 dimensional space. Each 
 We can generalise the game of SET into higher or lower dimensions by imagining that each "attribute" on the cards (colour, shading, shape, number of shapes) 
 
 For example: 
-insert an image of a card
+| <img src="SET-Main-Image-2-superJumbo.png" width="75%"> | 
+|:--:| 
+| <sup>*An example of 12 cards*</sup> |
 
 This card can be represented as the vector ("green", "one", "squiggle", "solid"). If we map each value to a digit 0, 1 or 2 (see table below) we can further compress the information contained in this card to (0, 0, 2, 0) 
 
@@ -50,9 +51,7 @@ This card can be represented as the vector ("green", "one", "squiggle", "solid")
 |               | Stripe       | 1             | 
 |               | Open         | 2             |  
 
-
-![Image showing an example of 12 cards from SET](SET-Main-Image-2-superJumbo.png "An example of 12 cards from SET")
-
+<img src="800px-Set_isomorphic_cards.svg.png" width="50%">
 
 Once the cards have been compressed into a vector, it's easy to imagine a card with any number of dimensions and any number of values per dimension - you just add more elements to the vector and increase the range of digits. For example, we could have a a game of set with 7 attributes each of which had 9 different values. If we used the digits 0-8 to represent the different values for each attribute, a card from this game could be represented as (4, 1, 7, 2, 0, 2, 7) (since the number of the cards is values^dimensions, 9^7 = 4,782,969 which would become a quite long and cumbersome game).
 

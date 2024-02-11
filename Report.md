@@ -23,13 +23,11 @@ The aim of the game is to identify "sets" amongst the cards on the table that sa
 
 In the standard game of SET, the dealer deals 12 cards onto the table and all players simultaneously look for sets amongst the cards. If none are found, three additional cards are dealt. When a player see's a set, she calls "SET!" and takes the three cards. Then, the dealer lays three more cards onto the table. The game continues in this fashion and ends when all cards the deck is exhausted and none of the remaining cards form sets. Whoever has collected the most sets at the end of the game is the winner. 
 
-This report is interested in the "end game" configuration of SET. That is, how many cards are left at the end of the game that do not form sets and in particular, how likely is it that there are _no_ cards left at the end. 
-
 ### Stochastic Simulation
-To investigate this question, we will employ a stochastic simulation, also known as a Monte Carlo simulation. Stochastic simulation, or Monte Carlo simulation, is a mathematical technique that is used to estimate the probability distribution of the outcome of an uncertain event. From Heath (p.511), 
+To investigate the probability of various events in the game, we will employ a stochastic simulation, also known as a Monte Carlo simulation. Stochastic simulation, or Monte Carlo simulation, is a mathematical technique that is used to estimate the probability distribution of the outcome of an uncertain event. From Heath (p.511), 
 > "Stochastic simulation methods attempt to mimic or replicate the behaviour of a system by exploiting randomness to obtain a statistical sample of possible outcomes" 
 
-Stochastic simulation uses repeated random sampling and the accuracy of the approximation improves as the number of sample increases. With this method, we will simulate many hundreds of thousands of games and use the outcomes to estimate the probability distribution for the end game configuration.
+Stochastic simulation uses repeated random sampling and the accuracy of the approximation improves as the number of sample increases. With this method, we will simulate many hundreds of thousands of games and use the outcomes to estimate probability distributions for different events.
 
 ### Dimensionality of the game
 We can imagine the cards in SET as a set of points in 4 dimensional space. Each "attribute" on the cards (colour, filling, shape, number) corresponds to an axis in four dimensions and each value for that attribute corresponds to a value along that axis. 
@@ -66,33 +64,36 @@ all the cards with other values for that attribute from the game e.g. pick colou
 remove all green and red cards from the game. 
 
 
-In this 3-dimensional version
-of the game there are only 3 attributes to check if the values are all 
-different or all the same: number, shape and shading. 
+In this 3-dimensional version of the game there are only 3 attributes to check if the values are all different or all the same: number, shape and shading. 
 
-These cards can similarly be represented as vectors with three elements, 
-In this game, the example card above would be represented as the vector (1, 2, 1). 
+These cards can similarly be represented as vectors but only three elements. In this game, the example card above would be represented as the vector (1, 2, 1). 
 
 The number of cards in the game is 
-$$ C = n^{d} $$
-$$ = 3^{3}  $$ 
-$$ = 27 $$
+$$c = n^d = 3^3 = 27$$
 
+If the conventional 4-dimensional game of set becomes too easy, we can increase the dimensions as well. 
+You can imagine the 5th attribute to be anything you like - we could add a border to every card, we could cut the cards into different shapes, we could add a background colour, we could even trascend the sense of sight and add a texture or smell to the cards. The important part is that now the vector that represents the card has 5 elements (e.g. (1, 2, 2, 1, 2) and there is an extra attribute to check when looking for sets. 
 
+Increasing the dimension also increases the number of cards in the game to
 
+$$c = n^d = 3^5 = 243$$
 
-The game of SET is governed by chance and probability. Imagining the game in different dimensions naturally invites the question: _Is the probability of particular outcomes in the game SET related to the dimension of the game and the number of values in each dimension?_ This question will be the focus of the rest of this report. 
+There is no theoretical limit to the number of dimensions the game could have, but playing 100,000 5-dimensional SET 
+is already pushing to the edge of my humble home laptop's processing power so I'll stop at 5. 
+ 
+## Introduction
 
-  
-### Introduction
-This report is interested in the probability distribution of different configurations in the "end game" of SET. That is, what is the probability that there is a particular number of cards left on the board at the end of the game, none of which make sets with any other cards on the board? 
+This report is interested in the following questions: _what is the probability that there is a particular number of cards left on the board at the end of the game, none of which make sets with any other cards on the board? And, is the probability related to the dimension of the game?_
 
 For now, we will discuss the conventional game of set in which there are 4 dimensions (colour, shape, number, filling) and three possible values for each dimension. From McMahon et al, we know that if there are more than 20 cards on the board, there must be a set amongst them (124). Additionally, if all but three cards have been made into sets, the remaining 3 cards _necessarily_ form a set (McMahon et al, 206). Based on these two facts, the possible number of cards left on the board at the end of the game are: 0, 6, 9, 12, 15, 18. 
 
-The probability distribution for the number of cards left on the table in the conventional game of set is well documented (McMahon p265; Warne; Faulk). The purpose of this report is to ask the question - is the probability distribution the same in different dimensions of the game?      
+The probability distribution for the number of cards left on the table in the 4-dimensional game of set is well documented (McMahon p265; Warne; Faulk) but will be recreated here for thoroughness.      
 
-We assume each shuffled deck equally likely and uniformly distributed
-### Body
+For 3-dimesional SET, if there are more than 9 cards on the board, there must be a set amongst them (McMahon et al, 230). In 5 dimensions, this number is 45 (ibid.). I suspect that it is also not possible to have 3 cards left on the table in 3-dimensional SET, but I have not seen it proved analytically. 
+
+Finally, we will assume each shuffled deck equally likely and uniformly distributed. For random number generation I'm using the python module `random` which generates numbers pseudo-randomly. For more info on this, see https://docs.python.org/3/library/random.html. 
+
+## Methods
 To simulate the game, three functions were written which are outlined below
 
 #### function `is_it_a_set(x, d, n)`
@@ -181,9 +182,9 @@ for i in range(games):
     remainders.append(len(board)//n)
 ```
 
-#### Results
+## Results
 The following simulations were run with results following,
-##### 100,000 games of SET with 3 dimensions and 3 values per dimension
+#### 100,000 games of SET with 3 dimensions and 3 values per dimension
 
 | <img src="100000games__3d__3n.png"> | 
 |:--:| 
@@ -192,7 +193,7 @@ The following simulations were run with results following,
 |:--:|:--:|:--:|:--:|:--:|
 |Frequency|39,226 |0 |59,389 |1,385| 
 
-##### 100,000 games of SET with 4 dimensions and 3 values per dimension
+#### 100,000 games of SET with 4 dimensions and 3 values per dimension
 
 | <img src="100000games__4d__3n.png" width="75%"> | 
 |:--:| 
@@ -202,7 +203,7 @@ The following simulations were run with results following,
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 |Frequency|1,669|0|49,487|42,262|6,532|50|
 
-##### 100,000 games of SET with 5 dimensions and 3 values per dimension
+#### 100,000 games of SET with 5 dimensions and 3 values per dimension
   
 | <img src="100000games__5d__3n.png" width="75%"> | 
 |:--:| 
@@ -211,7 +212,7 @@ The following simulations were run with results following,
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 |Frequency|1|1,215|12,552|37,415|35,820|11,680|1,277|40|
 
-#### Analysis 
+### Analysis 
 
 
 

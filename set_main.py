@@ -29,8 +29,6 @@ for i in range(games):
 counter = Counter(remainders)
 end = time.time()
 
-
-
 # From here onwards, we print a few results to the terminal, make 
 # and save a chart and write the summarised results to a CSV file.  
 
@@ -48,13 +46,10 @@ plt.suptitle(suptitle)
 plt.gca().yaxis.set_major_formatter(plt.matplotlib.ticker.StrMethodFormatter('{x:,.0f}'))
 plt.title(title)
 
-
 png_file_name = str(games) + "games__" + str(d) + "d__" + str(n) + "n" + ".png"
 plt.savefig(png_file_name)
 plt.show()
 plt.close()
-
-
 
 csv_file_name = str(games) + "games__" + str(d) + "d__" + str(n) + "n" + ".csv"
 with open(csv_file_name,'w') as f:

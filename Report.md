@@ -173,9 +173,7 @@ board, completed_sets = lets_play_set(d,n)
 Again, the function takes d and n as input as it is designed to be dimension- and value- agnostic and can be used for versions of set with any dimensions and any values per dimension. 
 
 #### Main
-The main section of the code 
-
-Define the dimensions and values per dimension of the game and how many games are to be simulated. For each game, the number of remaining cards at the end of the game is recorded (for clarity, the number of cards remaining at the end of the game is divided by 3). 
+The main section of the code defines the dimensions and values per dimension of the game and how many games are to be simulated. For each game, the number of remaining cards at the end of the game is recorded (for clarity, the number of cards remaining at the end of the game is divided by 3). 
 ```python
 for i in range(games):
     board, completed_sets = lets_play_set(d,n)
@@ -186,7 +184,7 @@ for i in range(games):
 The following simulations were run with results following,
 #### 100,000 games of SET with 3 dimensions and 3 values per dimension
 
-| <img src="100000games__3d__3n.png"> | 
+| <img src="100000games__3d__3n.png" width="75%"> | 
 |:--:| 
 
 |Cards remaining|0|3|6|9|
@@ -208,16 +206,20 @@ The following simulations were run with results following,
 | <img src="100000games__5d__3n.png" width="75%"> | 
 |:--:| 
  
-|Cards Remaining|3|6|9|12|15|18|21|24|
-|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-|Frequency|1|1,215|12,552|37,415|35,820|11,680|1,277|40|
+|Cards Remaining|3|6|9|12|15|18|21|24|27|
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+|Frequency|2|1,178|12,347|37,388|35,931|11,819|1,289|45|1|
 
 ### Analysis 
+## General comments on shape of distribution
+It stands out as immediately interesting that out of the three dimensions in which games were simulated, none have the same shape for probability distribution. In 3-dimensions, the most probable outcome is to be left with 6 cards but a fair proportion (almost 40%) of games end with no cards left. Ending the game with 9 cards (the highest possible number of cards) is much much more unusual than ending with 0 cards left. 
 
+In 4-dimensions, the most probable outcome is to be left with 6 or 9 cards. Having more cards than this is more likely than having fewer (i.e., the probability is not uniformly distributed around the mean). 
 
 
 ### Future work and references
 #### Future work
+It would be interesting to repeat the simulations outlined here but with different values for n and see how that changes the end-game probability distribution. 
 
 #### References
 1. McMahon, Liz, et al. The Joy of SET: The Many Mathematical Dimensions of a Seemingly Simple Card Game. Princeton University Press, 2017. 

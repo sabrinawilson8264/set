@@ -213,7 +213,7 @@ The following simulations were run with results following,
 
 ### Analysis 
 #### General comments on shape of distribution
-It stands out as immediately interesting that out of the three dimensions in which games were simulated, none have the same shape for probability distribution. In 3-dimensions, the most probable outcome is to be left with 6 cards but a fair proportion (almost 40%) of games end with no cards left. Ending the game with 9 cards (the highest possible number of cards) is much much more unusual than ending with 0 cards left but did occur. 
+It stands out as immediately interesting that out of the three dimensions in which games were simulated, none have the same shape for probability distribution. In 3-dimensions, the most probable outcome is to be left with 6 cards but a fair proportion (almost 40%) of games end with no cards left. The probability distribution is not symmetrical and skews lower than the mean value. Ending the game with 9 cards (the highest possible number of cards) is much much more unusual than ending with 0 cards left but did occur. 
 
 In 4-dimensions, the most probable outcome is to be left with 6 or 9 cards. Having more cards than this is more likely than having fewer (i.e., the probability distribution skews higher than the mean value). However, the game finishing with no cards left was a lot more probable than 15 cards left (1,669 games c.f. 50 games). The game finishing with 18 cards left was theoretically possible but did not occur in any of the games simulated. 
 
@@ -221,7 +221,7 @@ In the 5-dimensional version, the most probable outcome is for the game to end w
 
 #### Comments on having none or three cards left at the end
 In the 3-dimensional version of the game, it was fairly common to finish the game and have no cards left (40% of games had this outcome). As expected, no games ended with three cards left. 
-In the 4-dimensional version of the game, about 1.5% of games ended and had no cards left. Again, as predicted, no games ended with only three cards left. (My initial question that sparked this research was _what's the probability of having a perfect game of SET with no cards left at the end?_. I now know - more than 1.5% but less than 2%. Given how much SET I play, I'm surpised it's never occurred for me before). 
+In the 4-dimensional version of the game, about 1.5% of games ended and had no cards left. Again, as predicted, no games ended with only three cards left. (My initial question that sparked this research was _what's the probability of having a perfect game of SET with no cards left at the end?_ I now know - more than 1.5% but less than 2%. Given how much SET I play, I'm surpised it's never occurred for me before). 
 When I read that the game can't end with 3 cards in 4-dimensional set and I didn't observe it in 3-dimensional games either, I thought perhaps it was true for all dimensions of the game with 3-values per dimension. However having 3 cards left _was_ observed in the 5-dimensional simulation in 2 games out of 100,000. It's possible that this is because of an error that I've made in the code but I think if that were true I would have equally observed it in the 4- and 3-dimensional versions of the game. I don't yet have an analytical explanation for this. 
 
 Based on these experiments, it appears that the probability that there is a particular number of cards left on the board at the end of the game is related to the dimension of the game, although the means by which they are related is not known to me as yet. Additionally, If one is seeking the satisfaction of having no cards left at the end of the game, one's best chance of achieving this is by playing the 3-dimensional version of the game. 
@@ -234,6 +234,7 @@ Here are some things to think about
 * If I got some more computing power we could repeat the experiments with 6-dimensional set and see what that looked like. Also, we could run even _more_ games, and see how many games we would need to play to get
    * no cards left in 5-dimensional set
    * 18 cards left in 4-dimensional set
+   * If possible, I would like to calculate the mean and standard deviation for the distributions simulated in this report, and for higher dimensions of the game, plot them against d and see what that looked like. 
 * I've read the details of some other functions that have been written to calculate the end-game probability and the logic is slightly different to mine. Instead of ending the iteration when a set is found and returning the first set found, they make a list of all the sets that are on the board and pick one randomly. It's worth implementing this and finding out if it changes the results. 
 #### References
 1. McMahon, Liz, et al. The Joy of SET: The Many Mathematical Dimensions of a Seemingly Simple Card Game. Princeton University Press, 2017. 

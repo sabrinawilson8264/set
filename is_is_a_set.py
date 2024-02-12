@@ -29,11 +29,11 @@ def is_it_a_set(x, d, n):
             checker.append(x[j][i])
 
         
-        # Convert temp list to a set. This deduplicates the values and we can 
+        # Convert temp list to a set (python obj). This deduplicates the values and we can 
         # see how many distinct values of dimension i are on the cards. 
-        # if the length of the set is 1, all the cards have the same value for 
+        # if the length of the set (python obj) is 1, all the cards have the same value for 
         # dimension i. If all the cards have different values for dimension i, 
-        # the set will have length n.
+        # the set (python obj) will have length n.
         if len(set(checker)) == 1 or len(set(checker)) == n:
             continue
         
